@@ -27,8 +27,7 @@ function SignupForm({onLogin}){
 
     return(
         <div>
-        <form >
-
+        <form onSubmit={handleSubmit}>
             <label> Username: </label>
             <input 
             type="text" 
@@ -43,10 +42,8 @@ function SignupForm({onLogin}){
             value={age}
             onChange={e => 
             setAge(e.target.value)}/>
-
             <br/>
-            
-            <button onSubmit={handleSubmit} type="submit"> Submit </button>
+            <button type="submit"> Submit </button>
         </form>
     </div>
     )

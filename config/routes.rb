@@ -3,6 +3,8 @@ Rails.application.routes.draw do
   resources :games
   resources :users
 
+  post '/signup', to: "users#create"
+
   get "/me", to: "users#show"
   get "/mygames", to: "users#mygames"
 

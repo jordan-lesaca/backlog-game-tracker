@@ -1,26 +1,26 @@
 import AllGameCard from './AllGameCard'
-import MyGames from './MyGames'
+import GameForm from './GameForm'
 
-function AllGames({ games }){
+function AllGames({ games, user, removeGame, addGame, editGame }){
+
 
     return (
         <div> 
-            <h1> All Games </h1>
-            {games.map(game =>
-            <AllGameCard 
-            game={game} 
-            key={game.id}
-            />)}
+            <h2> All Games </h2>
+
+            <GameForm addGame={addGame} key={user.id} user={user} games={games} />
 
             {games.map(game =>
-            <MyGames
-            key={game.id}
+            <AllGameCard 
+            user={user}
+            removeGame={removeGame}
+            addGame={addGame}
+            editGame={editGame}
             game={game} 
-            />
-            )}
+            key={game.id}
+            /> )}
 
         </div>
     )
 }
-
 export default AllGames

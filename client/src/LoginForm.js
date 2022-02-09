@@ -15,14 +15,10 @@ function LoginForm({ onLogin }) {
       if (r.ok) {
         r.json().then((user) => onLogin(user));
       } else {
-        r.json().then((err) => alert(err.errors));
+        r.json().then((err) => alert(err.error, "invalid username"));
       }
     });
   }
-    
-//     {r.json()
-//         .then((user) => onLogin(user));});
-//   }
 
   return (
     <div>

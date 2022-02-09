@@ -1,5 +1,4 @@
 class GamesController < ApplicationController
-    skip_before_action :authorize
 
     def index 
       games = Game.all
