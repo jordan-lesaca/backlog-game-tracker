@@ -1,24 +1,51 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState, useEffect } from 'react';
+import { Switch, Route } from 'react-router-dom';
+import Login from './Login'
+import NavBar from './NavBar'
+import Games from './Games'
+import Home from './Home'
+import MyGames from './MyGames'
 
 function App() {
+  const [user, setUser] = useState(null);
+
+  useEffect(() => { //auto-login
+    fetch("/me").then((r) => {  
+      if (r.ok) { 
+        r.json().then((user) => setUser(user))}
+      }
+      )
+    }, []);  
+
+
+  function handleLogout() {
+    fetch("/logout", {
+      method: "DELETE",
+    }).then(() => setUser(null));
+  }
+
+
+  if (!user) return <Login onLogin={setUser} />  
+  
+
   return (
+
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <NavBar onLogout={handleLogout}/>
+      <Switch>   
+        <Route exact path="/">
+          <Home />
+        </Route>
+        <Route exact path="/allgames">
+          <Games  />
+        </Route>
+        <Route exact path="/mygames">
+          <MyGames user={user} />
+        </Route>
+
+      </Switch>
     </div>
+
   );
 }
 
