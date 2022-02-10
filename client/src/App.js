@@ -5,6 +5,12 @@ import NavBar from './NavBar'
 import Games from './Games'
 import Home from './Home'
 
+//Error handling
+//Password authentication
+//Fetch call to "MyGames"
+//Move delete / edit function to MyGames List only
+//Add more validations? 
+
 function App() {
   const [user, setUser] = useState(null);
 
