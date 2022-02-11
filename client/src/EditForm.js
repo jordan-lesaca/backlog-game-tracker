@@ -1,18 +1,17 @@
 import {useState} from "react"
 
-function EditForm({games, user, editGame, handleEditButton}){
-    const [title, setTitle] = useState(games.title)
-    const [year, setYear] = useState(games.year)
-    const [genre, setGenre] = useState(games.genre)
+function EditForm({game, user, editGame, handleEditButton}){
+    const [title, setTitle] = useState(game.title)
+    const [year, setYear] = useState(game.year)
+    const [genre, setGenre] = useState(game.genre)
 
-    console.log(title)
 
     function handleSubmit(e){
         e.preventDefault()
         setTitle("")
         setYear(0)
         setGenre("")
-        fetch(`/games/${games.id}`, {
+        fetch(`/games/${game.id}`, {
             method: "PATCH",
             headers: {
                 "Content-Type": "application/json",
@@ -31,7 +30,7 @@ function EditForm({games, user, editGame, handleEditButton}){
     return (
         <div>
     <form onSubmit={handleSubmit}>
-    <h2>Edit {console.log(title)} </h2>
+    <h2>Edit {console.log(game)} </h2>
         <label> Game Title: </label>
         <input type="text" id="title" value={title} onChange={e => setTitle(e.target.value)}/>
         <label>Year Released: </label> 
@@ -45,5 +44,3 @@ function EditForm({games, user, editGame, handleEditButton}){
 }
 
 export default EditForm
-
-

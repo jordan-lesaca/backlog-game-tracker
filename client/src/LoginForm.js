@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-function LoginForm({ onLogin }) {
+function LoginForm({ setUser }) {
   const [username, setUsername] = useState("");
 
   function handleSubmit(e) {
@@ -13,7 +13,7 @@ function LoginForm({ onLogin }) {
       body: JSON.stringify({ username }),
     }).then((r) => {
       if (r.ok) {
-        r.json().then((user) => onLogin(user));
+        r.json().then((user) => setUser(user));
       } else {
         r.json().then((err) => alert(err.error, "invalid username"));
       }

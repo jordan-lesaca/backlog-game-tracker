@@ -1,6 +1,7 @@
 import React from 'react'
 import { useEffect, useState } from 'react'
 import AllGames from './AllGames'
+import AllGameCard from './AllGameCard'
 
 function Games( { user } ) {
   const [games, setGames] = useState([]);
@@ -10,12 +11,6 @@ function Games( { user } ) {
     .then((r) => r.json())
     .then(games => setGames(games))    
     }, [])
-
-    // useEffect(() => {
-    //   fetch(`/mygames`)
-    //   .then((r) => r.json())
-    //   .then(games => setGames(games))    
-    //   }, [])
 
     function removeGame(game){
         setGames((games)=> games.filter(g => g.id !== game.id))
@@ -37,12 +32,13 @@ function Games( { user } ) {
 
   return (
     <div>
-      <AllGames games={games} 
+      {games.map(game =>
+      <AllGameCard game={game} 
       user={user} 
-      key={user.id}
+      key={game.id}
       removeGame={removeGame} 
       addGame={addGame} 
-      editGame={editGame}/>
+      editGame={editGame}/>)}
     </div>
   );
 }

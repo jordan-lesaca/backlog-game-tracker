@@ -1,7 +1,7 @@
 import EditForm from './EditForm'
 import {useState} from 'react'
 
-function AllGameCard({ game, removeGame, editGame, user }  ) {
+function AllGameCard({ game, removeGame, editGame, user,}  ) {
   const [editForm, setEditForm] = useState(false)
   const [editButton, setEditButton] = useState("Show Edit Form")
 
@@ -13,7 +13,7 @@ function AllGameCard({ game, removeGame, editGame, user }  ) {
       })
   }
 
-  function handleEdit(){
+  function handleEditButton(){
       setEditForm(!editForm)
       !editForm ? setEditButton("Hide Edit Form") : setEditButton("Show Edit Form")
     }
@@ -21,13 +21,18 @@ function AllGameCard({ game, removeGame, editGame, user }  ) {
     return (
       <div>
           <h1>{game.title} </h1>
-          <h3>{game.release_year} </h3>
+          <h3>{game.year} </h3>
           <h3>{game.genre} </h3>
           <br/>
           <button onClick={e => handleDelete(game)}>Delete</button>
-          <button onClick={e => handleEdit()}>{editButton}</button>
+          <button onClick={e => handleEditButton()}>{editButton}</button>
           {editForm ? 
-          <EditForm handleEdit={handleEdit} editGame={editGame} game={game} user={user}/> : null}
+          <EditForm handleEditButton={handleEditButton} 
+          editGame={editGame} 
+          game={game} 
+          key={game.id}
+          user={user}/> : null}
+
       </div>
     );
   }

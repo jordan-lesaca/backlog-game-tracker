@@ -2,14 +2,14 @@ import Signup from './Signup'
 import LoginForm from './LoginForm'
 import { useState } from 'react'
 
-function Login({ onLogin }) {
+function Login({ setUser }) {
     const [showLogin, setShowLogin] = useState(true)
 
   return (
     <div>   
       {showLogin ? (
         <>
-          <LoginForm onLogin={onLogin} />
+          <LoginForm setUser={setUser} />
 
           <p>
             Don't have an account? &nbsp;
@@ -20,7 +20,7 @@ function Login({ onLogin }) {
         </>
       ) : (
         <>
-          <Signup onLogin={onLogin} />
+          <Signup setUser={setUser} />
           <p>
             Already have an account? &nbsp;
             <button color="secondary" onClick={() => setShowLogin(true)}>

@@ -28,7 +28,7 @@ function App() {
     }).then(() => setUser(null));
   }
 
-  if (!user) return <Login onLogin={setUser} />  
+  if (!user) return <Login setUser={setUser} />  
   
   return (
 
