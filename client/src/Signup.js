@@ -6,15 +6,12 @@ function SignupForm({setUser}){
 
     function handleSubmit(e) {
         e.preventDefault();
-        fetch("/signup", {
+        fetch("/users", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({
-            username,
-            age
-          }),
+          body: JSON.stringify({username, age}),
         }).then((r) => {
           if (r.ok) {
             r.json().then((user) => setUser(user));
@@ -33,7 +30,8 @@ function SignupForm({setUser}){
             type="text" 
             id="username" 
             value={username} 
-            onChange={e => setUsername(e.target.value)}/> 
+            onChange={e =>
+            setUsername(e.target.value)}/> 
             <br/>
 
             <label> Age: </label>

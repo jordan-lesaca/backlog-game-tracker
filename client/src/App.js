@@ -4,10 +4,10 @@ import Login from './Login'
 import NavBar from './NavBar'
 import Games from './Games'
 import Home from './Home'
+import MyGames from './MyGames'
 
 //Error handling
 //Password authentication
-//Fetch call to "MyGames"
 //Move delete / edit function to MyGames List only
 //Add more validations? 
 
@@ -28,6 +28,7 @@ function App() {
     }).then(() => setUser(null));
   }
 
+
   if (!user) return <Login setUser={setUser} />  
   
   return (
@@ -38,8 +39,11 @@ function App() {
         <Route exact path="/">
           <Home />
         </Route>
-        <Route exact path="/allgames">
+        <Route exact path="/games">
           <Games user={user} key={user.id} />
+        </Route>
+        <Route exact path="/mygames">
+          <MyGames user={user} key={user.id} />
         </Route>
       </Switch>
     </div>

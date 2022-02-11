@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-    skip_before_action :authorize, only: [:create, :show]
+    skip_before_action :authorize, only: [:create, :mygames]
 
     def index
         users = User.all
@@ -22,7 +22,6 @@ class UsersController < ApplicationController
         session[:user_id] = user.id
         render json: user 
     end
-
 
     private
 
