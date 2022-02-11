@@ -5,7 +5,6 @@ function EditForm({game, user, editGame, handleEditButton}){
     const [year, setYear] = useState(game.year)
     const [genre, setGenre] = useState(game.genre)
 
-
     function handleSubmit(e){
         e.preventDefault()
         setTitle("")
@@ -30,7 +29,7 @@ function EditForm({game, user, editGame, handleEditButton}){
     return (
         <div>
     <form onSubmit={handleSubmit}>
-    <h2>Edit {console.log(game)} </h2>
+    <h2>Edit </h2>
         <label> Game Title: </label>
         <input type="text" id="title" value={title} onChange={e => setTitle(e.target.value)}/>
         <label>Year Released: </label> 

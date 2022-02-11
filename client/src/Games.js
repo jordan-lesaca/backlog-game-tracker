@@ -1,6 +1,6 @@
 import React from 'react'
 import { useEffect, useState } from 'react'
-import AllGames from './AllGames'
+import GameForm from './GameForm'
 import AllGameCard from './AllGameCard'
 
 function Games( { user } ) {
@@ -32,6 +32,8 @@ function Games( { user } ) {
 
   return (
     <div>
+      <GameForm user={user} addGame={addGame}/>
+
       {games.map(game =>
       <AllGameCard game={game} 
       user={user} 
@@ -39,6 +41,8 @@ function Games( { user } ) {
       removeGame={removeGame} 
       addGame={addGame} 
       editGame={editGame}/>)}
+
+
     </div>
   );
 }
