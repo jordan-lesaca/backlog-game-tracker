@@ -30,7 +30,7 @@ function EditForm({game, user, editGame, handleEditButton}){
     return (
         <div>
             <form onSubmit={handleSubmit}>
-                <h2>Edit {console.log(game)} </h2>
+                <h2>Edit</h2>
                     <label> Game Title: </label>
                         <input type="text" id="title" 
                         value={title} 
