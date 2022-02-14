@@ -1,47 +1,46 @@
-import { useState, useEffect } from 'react';
-import { Switch, Route } from 'react-router-dom';
-import Login from './Login'
-import NavBar from './NavBar'
-import Games from './Games'
-import Home from './Home'
-import MyGames from './MyGames'
+import {useState} from "react"
 
-function App() {
-  const [user, setUser] = useState(null);
+function EditForm({game, user, editGame, handleEditButton}){
+    const [title, setTitle] = useState(game.title)
+    const [year, setYear] = useState(game.year)
+    const [genre, setGenre] = useState(game.genre)
 
-  useEffect(() => { //auto-login
-    fetch("/me").then((r) => {  
-      if (r.ok) { 
-        r.json().then((user) => setUser(user))}
-      }
-      )
-    }, []);  
 
-  function handleLogout() {
-    fetch("/logout", {
-      method: "DELETE",
-    }).then(() => setUser(null));
-  }
-
-  if (!user) return <Login setUser={setUser} />  
-  
-  return (
-
-    <div className="App">
-      <NavBar onLogout={handleLogout} />
-      <Switch>   
-        <Route exact path="/">
-          <Home />
-        </Route>
-        <Route exact path="/games">
-          <Games user={user} key={user.id} />
-        </Route>
-        <Route exact path="/mygames">
-          <MyGames user={user} key={user.id} />
-        </Route>
-      </Switch>
-    </div>
-  );
+    function handleSubmit(e){
+        e.preventDefault()
+        setTitle("")
+        setYear(0)
+        setGenre("")
+        fetch(`/games/${game.id}`, {
+            method: "PATCH",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                title, year, genre,
+                user_id: user.id
+            }),
+        })
+          .then(r => r.json())
+          .then(g => {
+              editGame(g)
+              handleEditButton()
+            })
+    }
+    return (
+        <div>
+    <form onSubmit={handleSubmit}>
+    <h2>Edit </h2>
+        <label> Game Title: </label>
+        <input type="text" id="title" value={title} onChange={e => setTitle(e.target.value)}/>
+        <label>Year Released: </label> 
+        <input type="number" id="year" value={year} onChange={e => setYear(e.target.value)}/>
+        <label>Genre: </label>
+        <input type="text" id="genre" value={genre} onChange={e => setGenre(e.target.value)}/>
+        <input type="submit"/>
+    </form> 
+        </div>
+    )
 }
 
-export default App;
+export default EditForm
