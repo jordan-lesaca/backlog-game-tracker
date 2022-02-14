@@ -1,12 +1,12 @@
 class GamesController < ApplicationController
     
     def index 
-      games = Game.all.order(:title)
+      games = Game.all.order(:title) 
       render json: games
     end
 
     def create 
-        game = Game.create!(game_params)
+        game = Game.create!(game_params) 
         render json: game, status: :created
     end
   

@@ -23,7 +23,7 @@ default: &default
 
 development:
   <<: *default
-  database: backlog-game-tracker1
+  database: 3
 
   # The specified database role being used to connect to postgres.
   # To create additional roles in postgres see `$ createuser --help`.
@@ -57,7 +57,7 @@ development:
 # Do not set this db to the same as development or production.
 test:
   <<: *default
-  database: backlog-game-tracker2
+  database: 4
 
 
 # As with config/credentials.yml, you never want to store sensitive information,

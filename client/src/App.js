@@ -4,12 +4,13 @@ import Login from './Login'
 import NavBar from './NavBar'
 import Games from './Games'
 import Home from './Home'
+import About from './About'
 import MyGames from './MyGames'
 
 function App() {
   const [user, setUser] = useState(null);
 
-  useEffect(() => { //auto-login
+  useEffect(() => { 
     fetch("/me").then((r) => {  
       if (r.ok) { 
         r.json().then((user) => setUser(user))}
@@ -23,7 +24,7 @@ function App() {
     }).then(() => setUser(null));
   }
 
-  if (!user) return <Login setUser={setUser} />  
+  if (!user) return <Login setUser={setUser}/>
   
   return (
 
@@ -31,13 +32,16 @@ function App() {
       <NavBar onLogout={handleLogout} />
       <Switch>   
         <Route exact path="/">
-          <Home />
+          <Home user={user} />
         </Route>
         <Route exact path="/games">
           <Games user={user} key={user.id} />
         </Route>
         <Route exact path="/mygames">
           <MyGames user={user} key={user.id} />
+        </Route>
+        <Route exact path="/about">
+          <About user={user} key={user.id} />
         </Route>
       </Switch>
     </div>

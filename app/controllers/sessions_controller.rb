@@ -1,11 +1,11 @@
 class SessionsController < ApplicationController
-    before_action :authorize, only: [:destroy]
+    skip_before_action :authorize, only: [:create]
 
     def create #login
         user = User.find_by(username: params[:username])
-        if user&.authenticate(params[:password])
-          session[:user_id] = user.id
-          render json: user, status: :created
+        if user&.authenticate(params[:password]) 
+            session[:user_id] = user.id
+            render json: user, status: :created
         else
           render json: { errors: ["Invalid username or password"] }, status: :unauthorized
         end
@@ -19,13 +19,5 @@ class SessionsController < ApplicationController
             render json: { errors: ["You must be logged in to access this content"]}, status: :unauthorized
         end
     end
-
-    private
-
-  def authorize
-    @current_user = User.find(session[:user_id])
-    render json: { errors: "Not Authorized" }, 
-    status: unauthorized unless @current_user
-  end
 
 end

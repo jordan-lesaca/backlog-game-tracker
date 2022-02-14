@@ -4,6 +4,7 @@ function GameForm({ user, addGame}){
     const [ title, setTitle ] = useState("")
     const [ year, setYear ] = useState(0)
     const [ genre, setGenre ] = useState("")
+    const [ errors, setErrors ] = useState([])
 
     function handleSubmit(e){
         e.preventDefault()
@@ -23,27 +24,35 @@ function GameForm({ user, addGame}){
             }),
         }).then(r => {
             if (r.ok) { 
-                r.json()
-                .then(game => addGame(game))
-            } else {r.json().then(errors => 
-                alert(errors.errors))
+                r.json().then(game => {
+                    addGame(game)
+                 })
+            } else {
+                r.json().then(err => setErrors(err.errors))
             }
           })
         }
 
-return (
-  <div>
-      <form onSubmit={handleSubmit}>
-          <h2>New Game</h2>
-          <label> Title: </label>
-          <input type="text" id="title" value={title} onChange={e => setTitle(e.target.value)}/>
-          <label>Release Year: </label> 
-          <input type="number" id="Year" value={year} onChange={e => setYear(e.target.value)}/>
-          <label>Genre:  </label>
-          <input type="text" id="genre" value={genre} onChange={e => setGenre(e.target.value)}/>
-          <input type="submit"/>
+    return (
+    <div>
+        <form onSubmit={handleSubmit}>
+            <h1>Add a Game:</h1>
+                <label> Title: </label>
+                    <input type="text" id="title" 
+                    value={title} 
+                    onChange={e => setTitle(e.target.value)}/>
+                <label>Release Year: </label> 
+                    <input type="number" id="Year" 
+                    value={year} 
+                    onChange={e => setYear(e.target.value)}/>
+                <label>Genre:  </label>
+                    <input type="text" id="genre" 
+                    value={genre} 
+                    onChange={e => setGenre(e.target.value)}/>
+                <input type="submit"/>
+            <br/> <br/> {errors}
       </form>
-  </div>
+    </div>
 )
 }
 export default GameForm

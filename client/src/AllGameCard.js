@@ -1,4 +1,4 @@
-function AllGameCard({game}) {
+function AllGameCard({ game }) {
 
   return (
     <div>
@@ -9,4 +9,5 @@ function AllGameCard({game}) {
     </div>
   );
 }
+
 export default AllGameCard;
