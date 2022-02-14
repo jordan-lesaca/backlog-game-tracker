@@ -1,4 +1,4 @@
-class GameSerializer < ActiveModel::GameSerializer
-  attributes :id, :title, :year, :genre
-  belongs_to :user
+class GameSerializer < ActiveModel::Serializer
+  attributes :id, :title, :year, :genre, :user_id
+  belongs_to :user, serializer: UserSerializer
 end
