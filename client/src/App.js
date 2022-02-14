@@ -6,11 +6,6 @@ import Games from './Games'
 import Home from './Home'
 import MyGames from './MyGames'
 
-//Error handling
-//Password authentication
-//Move delete / edit function to MyGames List only
-//Add more validations? 
-
 function App() {
   const [user, setUser] = useState(null);
 
@@ -27,7 +22,6 @@ function App() {
       method: "DELETE",
     }).then(() => setUser(null));
   }
-
 
   if (!user) return <Login setUser={setUser} />  
   
