@@ -2,6 +2,10 @@ import Signup from './Signup'
 import LoginForm from './LoginForm'
 import { useState } from 'react'
 
+import Signup from './Signup'
+import LoginForm from './LoginForm'
+import { useState } from 'react'
+
 function Login({ setUser }) {
     const [showLogin, setShowLogin] = useState(true)
 
@@ -12,7 +16,7 @@ function Login({ setUser }) {
           <LoginForm setUser={setUser} />
 
           <p>
-            Don't have an account? &nbsp;
+            Don't have an account? 
             <button color="secondary" onClick={() => setShowLogin(false)}>
               Sign Up
             </button>
@@ -22,7 +26,7 @@ function Login({ setUser }) {
         <>
           <Signup setUser={setUser} />
           <p>
-            Already have an account? &nbsp;
+            Already have an account? 
             <button color="secondary" onClick={() => setShowLogin(true)}>
               Log In
             </button>
@@ -34,8 +38,3 @@ function Login({ setUser }) {
 }
 
 export default Login;
-
-
-/* <LoginForm onLogin={onLogin} />
-<h1>Create an account?:</h1>
-<Signup setUser={setUser} /> */
